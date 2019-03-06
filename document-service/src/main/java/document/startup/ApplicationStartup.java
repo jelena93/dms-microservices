@@ -1,4 +1,4 @@
-package document;
+package document.startup;
 
 import document.elasticsearch.DocumentIndexer;
 import org.springframework.beans.factory.InitializingBean;
@@ -18,7 +18,6 @@ public class ApplicationStartup implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         documentIndexer.createIndex();
-        documentIndexer.deleteAll();
     }
 
 }

@@ -16,14 +16,9 @@ public class Process implements Serializable {
     private static final long serialVersionUID = 5211102732754088501L;
 
     @Id
-//    @Basic(optional = false)
     @NotNull
-//    @TableGenerator(table = "seq_gen", name = "seq_gen", pkColumnName = "seq_name", valueColumnName = "seq_val",
-//            pkColumnValue = "id", allocationSize = 1)
-//    @GeneratedValue(strategy = GenerationType.TABLE, generator = "seq_gen")
-//    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "company_id")
+    @Column(name = "id")
     private Long id;
 
     @NotNull
@@ -48,7 +43,8 @@ public class Process implements Serializable {
 
     public Process() { }
 
-    public Process(String name, Process parent, boolean primitive, long ownerId) {
+    public Process(long id, String name, Process parent, boolean primitive, long ownerId) {
+        this.id = id;
         this.name = name;
         this.parent = parent;
         this.primitive = primitive;

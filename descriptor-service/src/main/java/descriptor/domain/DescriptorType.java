@@ -16,7 +16,8 @@ public class DescriptorType {
 
     public DescriptorType() { }
 
-    public DescriptorType(Class paramClass) {
+    public DescriptorType(long id, Class paramClass) {
+        this.id = id;
         this.paramClass = paramClass;
     }
 

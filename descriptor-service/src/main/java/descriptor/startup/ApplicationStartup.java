@@ -15,8 +15,6 @@ import java.util.Date;
 @Component
 public class ApplicationStartup implements InitializingBean {
 
-    @Value("${addToDb}")
-    private boolean addToDb;
     private final DocumentTypeService documentTypeService;
     private final DescriptorTypeService descriptorTypeService;
 
@@ -28,34 +26,30 @@ public class ApplicationStartup implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        if (addToDb) {
-            DescriptorType descriptorTypeInteger = new DescriptorType(Integer.class);
-            DescriptorType descriptorTypeDouble = new DescriptorType(Double.class);
-            DescriptorType descriptorTypeDate = new DescriptorType(Date.class);
+        DescriptorType descriptorTypeInteger = new DescriptorType(1, Integer.class);
+        DescriptorType descriptorTypeDouble = new DescriptorType(2, Double.class);
+        DescriptorType descriptorTypeDate = new DescriptorType(3, Date.class);
 
-            descriptorTypeInteger = descriptorTypeService.save(descriptorTypeInteger);
-            descriptorTypeDouble = descriptorTypeService.save(descriptorTypeDouble);
-            descriptorTypeDate = descriptorTypeService.save(descriptorTypeDate);
+        descriptorTypeInteger = descriptorTypeService.save(descriptorTypeInteger);
+        descriptorTypeDouble = descriptorTypeService.save(descriptorTypeDouble);
+        descriptorTypeDate = descriptorTypeService.save(descriptorTypeDate);
 
-            DocumentType documentType = new DocumentType("Nalog za placanje");
-            Descriptor descriptor = new Descriptor("Broj naloga", documentType, descriptorTypeInteger);
-            documentType.getDescriptors().add(descriptor);
-            descriptor = new Descriptor("Suma", documentType, descriptorTypeDouble);
-            documentType.getDescriptors().add(descriptor);
-            descriptor = new Descriptor("Datum", documentType, descriptorTypeDate);
-            documentType.getDescriptors().add(descriptor);
-            documentTypeService.save(documentType);
+        DocumentType documentType = new DocumentType(1, "Nalog za placanje");
+        Descriptor descriptor = new Descriptor(1, "Broj naloga", documentType, descriptorTypeInteger);
+        documentType.getDescriptors().add(descriptor);
+        descriptor = new Descriptor(2, "Suma", documentType, descriptorTypeDouble);
+        documentType.getDescriptors().add(descriptor);
+        descriptor = new Descriptor(3, "Datum", documentType, descriptorTypeDate);
+        documentType.getDescriptors().add(descriptor);
+        documentTypeService.save(documentType);
 
-            documentType = new DocumentType("Profaktura dobavljaca");
-            documentType = documentTypeService.save(documentType);
-            descriptor = new Descriptor("Broj profakture", documentType, descriptorTypeInteger);
-            documentType.getDescriptors().add(descriptor);
-            descriptor = new Descriptor("Datum", documentType, descriptorTypeDate);
-            documentType.getDescriptors().add(descriptor);
-            descriptor = new Descriptor("Suma", documentType, descriptorTypeDouble);
-            documentType.getDescriptors().add(descriptor);
-            documentTypeService.save(documentType);
-        }
-
+        documentType = new DocumentType(2, "Profaktura dobavljaca");
+        descriptor = new Descriptor(4, "Broj profakture", documentType, descriptorTypeInteger);
+        documentType.getDescriptors().add(descriptor);
+        descriptor = new Descriptor(5, "Datum", documentType, descriptorTypeDate);
+        documentType.getDescriptors().add(descriptor);
+        descriptor = new Descriptor(6, "Suma", documentType, descriptorTypeDouble);
+        documentType.getDescriptors().add(descriptor);
+        documentTypeService.save(documentType);
     }
 }

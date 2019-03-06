@@ -43,7 +43,7 @@
                                    name="headquarters" type="text" disabled/>
                         </div>
                     </div>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
                     <div class="form-group">
                         <div class="col-lg-offset-10 col-lg-2">
                             <button class="btn btn-primary" type="button" onclick="editCompany()" id="btn-edit">Edit

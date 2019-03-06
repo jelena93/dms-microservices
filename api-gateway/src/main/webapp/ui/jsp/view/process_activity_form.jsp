@@ -31,7 +31,7 @@
                 <input type="checkbox" style="width: 20px" class="checkbox form-control" id="primitive" name="primitive" disabled/>
             </div>
         </div>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
         <input type="hidden" name="isActivity" id="isActivity"/>
         <input type="hidden" name="parent" id ="parent" />
         <input type="hidden" name="id" id ="id" />

@@ -9,7 +9,7 @@
 
     <parent>
         <groupId>org.dms</groupId>
-        <artifactId>spring-dms-microservices</artifactId>
+        <artifactId>dms-microservices</artifactId>
         <version>1.0.0</version>
     </parent>
 

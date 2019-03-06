@@ -1,5 +1,9 @@
 package document.elasticsearch;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import document.domain.Descriptor;
 import document.domain.Document;
@@ -15,10 +19,6 @@ import org.elasticsearch.search.SearchHit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 
@@ -58,23 +58,6 @@ public class DocumentIndexer {
         }
     }
 
-//
-//    public void testQuery() throws Exception {
-//        SearchResponse searchResponse = elasticSearchClient.prepareSearch(elasticsearchIndexName)
-//                .setQuery(
-//                        QueryBuilders.queryStringQuery("premn")
-//                                .analyzer("autocomplete")
-//                )
-//                .execute()
-//                .actionGet();
-//        System.out.println(searchResponse.getHits().getHits().length);
-//        List<DocumentDto> dtos = mapToDocumentList(searchResponse);
-//        for (DocumentDto d : dtos) {
-//            System.out.println("evo " + d.getFileName());
-//        }
-//    }
-
-
     public void save(Document document) throws Exception {
         System.out.println("save document " + document);
         elasticSearchClient.prepareIndex(elasticsearchIndexName, elasticsearchTypeName, String.valueOf(document.getId()))
@@ -108,23 +91,6 @@ public class DocumentIndexer {
                         .field("number_of_shards", elasticsearchNumberOfShards)
                         .field("number_of_replicas", elasticsearchNumberOfReplicas)
 
-//                        .startObject("analysis")
-//                        .startObject("analyzer")
-//                        .startObject("autocomplete")
-//                        .field("type", "custom")
-//                        .field("tokenizer", "standard")
-//                        .field("filter", new String[]{"lowercase", "autocomplete_filter"})
-//                        .endObject()
-//                        .endObject()
-//                        .startObject("filter")
-//                        .startObject("autocomplete_filter")
-//                        .field("type", "edge_ngram")
-//                        .field("min_gram", "1")
-//                        .field("max_gram", "20")
-//                        .endObject()
-//                        .endObject()
-//                        .endObject()
-
                         .endObject();
     }
 
@@ -145,15 +111,11 @@ public class DocumentIndexer {
                         .startObject("fileName")
                         .field("type", "text")
                         .field("index", true)
-//                        .field("analyzer", "autocomplete")
-//                        .field("search_analyzer", "standard")
                         .endObject()
 
                         .startObject("content")
                         .field("type", "text")
                         .field("index", true)
-//                        .field("analyzer", "autocomplete")
-//                        .field("search_analyzer", "standard")
                         .endObject()
 
                         .startObject("file")
@@ -172,15 +134,11 @@ public class DocumentIndexer {
                         .startObject("descriptorKey")
                         .field("type", "text")
                         .field("index", true)
-//                        .field("analyzer", "autocomplete")
-//                        .field("search_analyzer", "standard")
                         .endObject()
 
                         .startObject("descriptorValue")
                         .field("type", "text")
                         .field("index", true)
-//                        .field("analyzer", "autocomplete")
-//                        .field("search_analyzer", "standard")
                         .endObject()
 
                         .endObject()
@@ -225,12 +183,4 @@ public class DocumentIndexer {
         return documents;
     }
 
-
-    //    private void insertOrUpdateDocument(long companyID, Document document) throws Exception {
-//        IndexRequest indexRequest = new IndexRequest(elasticsearchIndexName, elasticsearchTypeName, String.valueOf(document.getId()))
-//                .source(buildDocument(document));
-//        UpdateRequest updateRequest = new UpdateRequest(elasticsearchIndexName, elasticsearchTypeName, String.valueOf(document.getId()))
-//                .doc(buildDocument(document)).upsert(indexRequest);
-//        elasticSearchClient.update(updateRequest).get();
-//    }
 }

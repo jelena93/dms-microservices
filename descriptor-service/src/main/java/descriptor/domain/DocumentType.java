@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "document_type")
-public class DocumentType  {
+public class DocumentType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,8 @@ public class DocumentType  {
         descriptors = new ArrayList<>();
     }
 
-    public DocumentType(String name) {
+    public DocumentType(long id, String name) {
+        this.id = id;
         this.name = name;
         descriptors = new ArrayList<>();
     }

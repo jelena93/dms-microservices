@@ -1,5 +1,11 @@
 package descriptor.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import descriptor.command.DescriptorCmd;
 import descriptor.command.DocumentCmd;
 import descriptor.command.DocumentTypeCmd;
@@ -11,7 +17,6 @@ import descriptor.messaging.output.DocumentMessagingService;
 import descriptor.messaging.output.dto.DocumentMessagingDto;
 import descriptor.service.DescriptorService;
 import descriptor.service.DocumentTypeService;
-import descriptor.validator.DescriptorValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpEntity;
@@ -27,13 +32,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
 @RestController
 @RequestMapping("/")
 public class DescriptorServiceController {
@@ -42,22 +40,19 @@ public class DescriptorServiceController {
     private final DocumentMessagingService documentMessagingService;
     private final DocumentTypeMapper documentTypeMapper;
     private final RestTemplate restTemplate;
-    private final DescriptorValidator descriptorValidator;
 
     @Autowired
     public DescriptorServiceController(DocumentTypeService documentTypeService, DescriptorService descriptorService,
                                        DocumentMessagingService documentMessagingService,
                                        DocumentTypeMapper documentTypeMapper,
-                                       RestTemplate restTemplate, DescriptorValidator descriptorValidator) {
+                                       RestTemplate restTemplate) {
         this.documentTypeService = documentTypeService;
         this.descriptorService = descriptorService;
         this.documentMessagingService = documentMessagingService;
         this.documentTypeMapper = documentTypeMapper;
         this.restTemplate = restTemplate;
-        this.descriptorValidator = descriptorValidator;
     }
 
-//    @PreAuthorize("hasRole('ROLE_UPLOADER')")
     @PostMapping("/upload")
     public String uploadDocument(@Valid DocumentCmd documentCmd, HttpServletRequest request) throws Exception {
         List<MediaType> acceptableMediaTypes = new ArrayList<>();
@@ -85,8 +80,6 @@ public class DescriptorServiceController {
 
         documentCmd.getDescriptors().addAll(descriptorsCmd);
 
-        descriptorValidator.validate(newDescriptors);
-
         MultiValueMap<String, Object> valueMap = new LinkedMultiValueMap<>();//
         valueMap.add("file", new ByteArrayResource(documentCmd.getFile().getBytes()));
         documentCmd.setFileName(documentCmd.getFile().getOriginalFilename());
@@ -108,13 +101,11 @@ public class DescriptorServiceController {
     }
 
     @GetMapping("/document-type/all")
-//    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_UPLOADER')")
     public List<DocumentTypeDto> getAllDocumentTypes() {
         return documentTypeMapper.mapToModelList(documentTypeService.findAll());
     }
 
     @PostMapping("/document-type")
-//    @PreAuthorize("hasRole('ROLE_USER')")
     public DocumentTypeDto addDocumentType(@RequestBody DocumentTypeCmd documentTypeCmd) {
         DocumentType documentType = documentTypeMapper.mapToEntity(documentTypeCmd);
         return documentTypeMapper.mapToModel(documentTypeService.save(documentType));

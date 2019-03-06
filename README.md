@@ -1,4 +1,4 @@
-spring-dms-microservices
+dms-microservices
 
 api-gateway [mvn spring-boot:run]
 

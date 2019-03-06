@@ -25,7 +25,6 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company save(Company company) {
-        System.out.println("save " + company.getId());
         return companyRepository.save(company);
     }
 

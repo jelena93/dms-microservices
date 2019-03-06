@@ -1,13 +1,12 @@
 package document.command;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DocumentCmd {
-
     private Long ownerId;
     private String fileName;
     private Long documentTypeId;

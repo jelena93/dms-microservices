@@ -1,26 +1,17 @@
 package descriptor.command;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.web.multipart.MultipartFile;
+
 public class DocumentCmd {
-
     private boolean input;
-
     private Long ownerId;
-
-    @NotNull(message = "{validation.document.activityId.null}")
     private Long activityId;
-
     private String fileName;
-
-    @NotNull(message = "{validation.document.documentTypeId.null}")
     private Long documentTypeId;
-
     private List<DescriptorCmd> descriptors = new ArrayList<>();
 
     @JsonIgnore

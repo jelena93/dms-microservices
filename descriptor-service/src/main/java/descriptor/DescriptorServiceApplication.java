@@ -12,22 +12,12 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-//@EnableSwagger2
 @EnableBinding({DocumentOutputChannel.class, DocumentInputChannel.class})
-//@EnableCircuitBreaker
-//@EnableOAuth2Client
 public class DescriptorServiceApplication {
-
-//    @Bean
-//    public Docket api() {
-//        return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors
-//                .basePackage("descriptor.controller"))
-//                .paths(PathSelectors.any()).build();
-//    }
 
     @LoadBalanced
     @Bean
-    public RestTemplate auth2RestTemplate() {
+    public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 

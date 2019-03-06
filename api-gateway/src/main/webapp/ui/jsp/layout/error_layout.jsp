@@ -22,7 +22,7 @@
         <link href="<c:url value="/resources/css/style-responsive.css" />" rel="stylesheet">
         <script src="<c:url value="/resources/js/jquery.js" />"></script>
 
-        <sec:authentication var="user" property="principal" scope="request"/>
+        <%--<sec:authentication var="user" property="principal" scope="request"/>--%>
         <title>${title} ${error.errorCode}</title>
     </head>
     <body>

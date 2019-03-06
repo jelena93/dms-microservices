@@ -52,7 +52,8 @@ public class Descriptor implements Serializable {
     public Descriptor() {
     }
 
-    public Descriptor(String key, DocumentType documentType, DescriptorType descriptorType) {
+    public Descriptor(long id, String key, DocumentType documentType, DescriptorType descriptorType) {
+        this.id = id;
         this.descriptorKey = key;
         this.documentType = documentType;
         this.descriptorType = descriptorType;
