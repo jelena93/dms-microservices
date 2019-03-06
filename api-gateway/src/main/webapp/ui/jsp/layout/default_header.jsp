@@ -12,20 +12,20 @@
     <ul class="nav pull-right top-menu">
         <li class="dropdown">
             <!--<a data-toggle="dropdown" class="dropdown-toggle" href="#">-->
-                <span class="username">Logged in as ${user.details.principal.username}</span>
-                <br>
-                <span class="roles">Roles:
-                    <c:forEach var="a" items="${user.details.principal.authorities}" varStatus="loop">
-                        <c:choose>
-                            <c:when test="${loop.index == fn:length(user.details.principal.authorities) - 1}">
-                                ${fn:substringAfter(a.authority,'ROLE_')}
-                            </c:when>
-                            <c:otherwise>
-                                ${fn:substringAfter(a.authority,'ROLE_')},
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                </span>
+                <%--<span class="username">Logged in as ${user.details.principal.username}</span>--%>
+                <%--<br>--%>
+                <%--<span class="roles">Roles:--%>
+                    <%--<c:forEach var="a" items="${user.details.principal.authorities}" varStatus="loop">--%>
+                        <%--<c:choose>--%>
+                            <%--<c:when test="${loop.index == fn:length(user.details.principal.authorities) - 1}">--%>
+                                <%--${fn:substringAfter(a.authority,'ROLE_')}--%>
+                            <%--</c:when>--%>
+                            <%--<c:otherwise>--%>
+                                <%--${fn:substringAfter(a.authority,'ROLE_')},--%>
+                            <%--</c:otherwise>--%>
+                        <%--</c:choose>--%>
+                    <%--</c:forEach>--%>
+                <%--</span>--%>
             <!--</a>-->
         </li>
     </ul>

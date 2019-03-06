@@ -1,11 +1,11 @@
 $(document).ready(function () {
-    if (getCookie("JSESSIONID") === null) {
-        eraseCookie("companyId");
-        eraseCookie("companyName");
-    }
-    if (getCookie("companyId") === null) {
-        getUsersCompany();
-    }
+    // if (getCookie("JSESSIONID") === null) {
+    //     eraseCookie("companyId");
+    //     eraseCookie("companyName");
+    // }
+    // if (getCookie("companyId") === null) {
+    //     getUsersCompany();
+    // }
 });
 
 function getUsersCompany() {

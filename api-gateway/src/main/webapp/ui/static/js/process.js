@@ -156,9 +156,9 @@ function addProcess() {
             parentId: selectedNode !== null ? selectedNode.id : null,
             primitive: $("#primitive").prop('checked')
         }),
-        beforeSend: function (request) {
-            request.setRequestHeader(header, token);
-        },
+        // beforeSend: function (request) {
+        //     request.setRequestHeader(header, token);
+        // },
         success: function (data) {
             $("#register_form").hide();
             $('#processes').jstree("deselect_all");
@@ -185,9 +185,9 @@ function addActivity() {
             inputListDocumentTypes: $("#input_document_types").val(),
             outputListDocumentTypes: $("#output_document_types").val()
         }),
-        beforeSend: function (request) {
-            request.setRequestHeader(header, token);
-        },
+        // beforeSend: function (request) {
+        //     request.setRequestHeader(header, token);
+        // },
         success: function (data) {
             $("#register_form").hide();
             $('#processes').jstree(true).refresh();
@@ -231,9 +231,9 @@ function editProcess(url) {
             parentId: selectedNode !== null ? selectedNode.id : null,
             primitive: $("#primitive").prop('checked')
         }),
-        beforeSend: function (request) {
-            request.setRequestHeader(header, token);
-        },
+        // beforeSend: function (request) {
+        //     request.setRequestHeader(header, token);
+        // },
         success: function (data) {
             console.log(data);
             canEdit = false;
@@ -272,9 +272,9 @@ function editActivity(url) {
             inputListDocumentTypes: $("#input_document_types").val(),
             outputListDocumentTypes: $("#output_document_types").val()
         }),
-        beforeSend: function (request) {
-            request.setRequestHeader(header, token);
-        },
+        // beforeSend: function (request) {
+        //     request.setRequestHeader(header, token);
+        // },
         success: function (data) {
             canEdit = false;
             isSure = false;

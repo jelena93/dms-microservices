@@ -19,7 +19,7 @@
 <body>
 <script language=javascript>
     var user = "${user.details.principal.username}";
-    var company = "${user.details.principal.companyId}";
+    var company = 1;
 </script>
 <!-- container section start -->
 <section id="container" class="">

@@ -16,12 +16,14 @@ public class Process implements Serializable {
     private static final long serialVersionUID = 5211102732754088501L;
 
     @Id
-    @Basic(optional = false)
+//    @Basic(optional = false)
     @NotNull
-    @TableGenerator(table = "seq_gen", name = "seq_gen", pkColumnName = "seq_name", valueColumnName = "seq_val",
-            pkColumnValue = "id", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "seq_gen")
-    @Column(name = "id")
+//    @TableGenerator(table = "seq_gen", name = "seq_gen", pkColumnName = "seq_name", valueColumnName = "seq_val",
+//            pkColumnValue = "id", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.TABLE, generator = "seq_gen")
+//    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "company_id")
     private Long id;
 
     @NotNull

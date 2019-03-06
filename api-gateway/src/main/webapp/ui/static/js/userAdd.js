@@ -57,9 +57,9 @@ function addUser() {
             url: "/api/company/user",
             contentType: "application/json",
             dataType: 'json',
-            beforeSend: function (request) {
-                request.setRequestHeader(header, token);
-            },
+            // beforeSend: function (request) {
+            //     request.setRequestHeader(header, token);
+            // },
             data: JSON.stringify({
                 name: $("#name").val(),
                 surname: $("#surname").val(),

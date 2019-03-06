@@ -14,9 +14,9 @@ function saveCompany() {
                 identificationNumber: $("#identificationNumber").val(),
                 headquarters: $("#headquarters").val()
             }),
-            beforeSend: function (request) {
-                request.setRequestHeader(header, token);
-            },
+            // beforeSend: function (request) {
+            //     request.setRequestHeader(header, token);
+            // },
             success: function (data) {
                 window.location = "/company/" + data.id;
             },

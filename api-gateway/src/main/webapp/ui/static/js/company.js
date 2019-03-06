@@ -31,9 +31,9 @@ function editCompany() {
                     identificationNumber: $("#identificationNumber").val(),
                     headquarters: $("#headquarters").val()
                 }),
-                beforeSend: function (request) {
-                    request.setRequestHeader(header, token);
-                },
+                // beforeSend: function (request) {
+                //     request.setRequestHeader(header, token);
+                // },
                 success: function (data) {
                     showSuccessMessage("Company successfully edited");
                     disableForm(true);

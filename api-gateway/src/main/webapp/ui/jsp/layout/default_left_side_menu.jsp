@@ -8,7 +8,7 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        <sec:authorize access="hasRole('ADMIN')">
+        <%--<sec:authorize access="hasRole('ADMIN')">--%>
             <li class="sub-menu">
                 <a href="javascript:;" class="">
                     <i class="icon_document_alt"></i>
@@ -31,8 +31,8 @@
                     <li><a class="" href="${pageContext.request.contextPath}/user/search">Search users</a></li>
                 </ul>
             </li>
-        </sec:authorize>
-        <sec:authorize access="hasRole('USER')">
+        <%--</sec:authorize>--%>
+        <%--<sec:authorize access="hasRole('USER')">--%>
             <li class="sub-menu">
                 <a href="javascript:;" class="">
                     <i class="icon_document_alt"></i>
@@ -44,8 +44,8 @@
                     </li>
                 </ul>
             </li>
-        </sec:authorize>
-        <sec:authorize access="hasRole('UPLOADER')">
+        <%--</sec:authorize>--%>
+<%--//        <sec:authorize access="hasRole('UPLOADER')">--%>
             <li class="sub-menu">
                 <a href="javascript:;" class="">
                     <i class="icon_document_alt"></i>
@@ -57,6 +57,6 @@
                     <li><a class="" href="${pageContext.request.contextPath}/document/search">Search documents</a></li>
                 </ul>
             </li>
-        </sec:authorize>
+        <%--</sec:authorize>--%>
     </ul>
 </div>

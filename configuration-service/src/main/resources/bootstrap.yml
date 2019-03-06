@@ -8,7 +8,7 @@ spring:
       server:
         git:
 #          uri: https://github.com/jelena93/spring-dms-microservices-configuration
-          uri: file:///C:/Users/jelena/Desktop/spring-dms-microservices-configuration/
+          uri: file:///C:/Users/jelena/Desktop/predavanje/spring-dms-microservices-configuration/
 eureka:
   instance:
       hostname: localhost

@@ -18,10 +18,10 @@ public class User {
     @Column(name = "company_id")
     private Long companyId;
 
-    @ManyToMany
-    @JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns =
-    @JoinColumn(name = "authority"))
-    private List<Authority> authorities;
+//    @ManyToMany
+//    @JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns =
+//    @JoinColumn(name = "authority"))
+//    private List<Authority> authorities;
 
     public String getUsername() {
         return username;
@@ -47,13 +47,13 @@ public class User {
         this.companyId = companyId;
     }
 
-    public List<Authority> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(List<Authority> authorities) {
-        this.authorities = authorities;
-    }
+//    public List<Authority> getAuthorities() {
+//        return authorities;
+//    }
+//
+//    public void setAuthorities(List<Authority> authorities) {
+//        this.authorities = authorities;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -84,7 +84,7 @@ public class User {
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", companyId=" + companyId +
-                ", authorities=" + authorities +
+//                ", authorities=" + authorities +
                 '}';
     }
 }

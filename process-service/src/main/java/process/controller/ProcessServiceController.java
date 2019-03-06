@@ -1,8 +1,13 @@
 package process.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import process.command.ActivityCmd;
 import process.command.ProcessCmd;
 import process.domain.Activity;
@@ -18,11 +23,11 @@ import process.service.ActivityService;
 import process.service.ProcessService;
 import process.validator.ProcessValidator;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/")
@@ -50,8 +55,8 @@ public class ProcessServiceController {
     }
 
     @GetMapping(path = "/all/{ownerId}")
-    public List<TreeDto> getProcesses(@PathVariable long ownerId, OAuth2Authentication oAuth2Authentication) throws Exception {
-        checkUser(ownerId, oAuth2Authentication);
+    public List<TreeDto> getProcesses(@PathVariable long ownerId/*, OAuth2Authentication oAuth2Authentication*/) throws Exception {
+//        checkUser(ownerId, oAuth2Authentication);
         List<Process> processes = processService.findByOwnerId(ownerId);
         List<TreeDto> data = new ArrayList<>();
         for (Process process : processes) {
@@ -80,9 +85,9 @@ public class ProcessServiceController {
     }
 
     @GetMapping(path = "/process/{id}")
-    public ProcessDto showProcess(@PathVariable long id, OAuth2Authentication oAuth2Authentication) throws Exception {
+    public ProcessDto showProcess(@PathVariable long id/*, OAuth2Authentication oAuth2Authentication*/) throws Exception {
         Process process = processService.findOne(id);
-        checkUser(process.getOwnerId(), oAuth2Authentication);
+//        checkUser(process.getOwnerId(), oAuth2Authentication);
         return processMapper.mapToModel(process);
     }
 
@@ -96,10 +101,10 @@ public class ProcessServiceController {
     }
 
     @PutMapping(path = "/process/{id}")
-    public ProcessDto editProcess(@PathVariable Long id, @RequestBody @Valid ProcessCmd processCmd, OAuth2Authentication oAuth2Authentication) throws Exception {
+    public ProcessDto editProcess(@PathVariable Long id, @RequestBody @Valid ProcessCmd processCmd/*, OAuth2Authentication oAuth2Authentication*/) throws Exception {
         Process process = processService.findOne(id);
         if (process == null) throw new Exception("There is no process with id " + id);
-        checkUser(process.getOwnerId(), oAuth2Authentication);
+//        checkUser(process.getOwnerId(), oAuth2Authentication);
 
         processValidator.validate(processCmd);
 
@@ -122,22 +127,22 @@ public class ProcessServiceController {
 
 
     @GetMapping(path = "/activity/{id}")
-    public ActivityDto getActivity(@PathVariable long id, OAuth2Authentication oAuth2Authentication) throws Exception {
+    public ActivityDto getActivity(@PathVariable long id/*, OAuth2Authentication oAuth2Authentication*/) throws Exception {
         Activity activity = activityService.findOne(id);
-        checkUser(activity.getProcess().getOwnerId(), oAuth2Authentication);
+//        checkUser(activity.getProcess().getOwnerId(), oAuth2Authentication);
         System.out.println(activity);
         return activityMapper.mapToModel(activity);
     }
 
     @PostMapping(path = "/activity")
-    public ActivityDto addActivity(@RequestBody @Valid ActivityCmd activityCmd, OAuth2Authentication oAuth2Authentication) throws Exception {
+    public ActivityDto addActivity(@RequestBody @Valid ActivityCmd activityCmd/*, OAuth2Authentication oAuth2Authentication*/) throws Exception {
         System.out.println("addActivity " + activityCmd);
         Process process = processService.findOne(activityCmd.getProcessId());
         if (process == null) throw new Exception("Process is required");
 
         activityValidator.validate(activityCmd);
 
-        checkUser(process.getOwnerId(), oAuth2Authentication);
+//        checkUser(process.getOwnerId(), oAuth2Authentication);
 
         Activity activity = activityMapper.mapToEntity(activityCmd);
         process.getActivityList().add(activity);
@@ -146,23 +151,23 @@ public class ProcessServiceController {
     }
 
     @PutMapping(path = "/activity/{id}")
-    public ActivityDto editActivity(@PathVariable Long id, @RequestBody @Valid ActivityCmd activityCmd, OAuth2Authentication oAuth2Authentication) throws Exception {
+    public ActivityDto editActivity(@PathVariable Long id, @RequestBody @Valid ActivityCmd activityCmd/*, OAuth2Authentication oAuth2Authentication*/) throws Exception {
         Activity activity = activityService.findOne(id);
         if (activity == null) {
             throw new Exception("There is no activity with id " + id);
         }
-        checkUser(activity.getProcess().getOwnerId(), oAuth2Authentication);
+//        checkUser(activity.getProcess().getOwnerId(), oAuth2Authentication);
         activityMapper.updateEntityFromModel(activityCmd, activity);
         return activityMapper.mapToModel(activityService.save(activity));
     }
 
-    private static void checkUser(Long ownerId, OAuth2Authentication oAuth2Authentication) throws Exception {
-        Map<String, Object> details = (Map<String, Object>) oAuth2Authentication.getUserAuthentication().getDetails();
-        Map<String, Object> principal = (Map<String, Object>) details.get("principal");
-        System.out.println(principal.get("companyId"));
-        if (ownerId != Long.valueOf(principal.get("companyId").toString())) {
-            throw new Exception("Not allowed");
-        }
+    private static void checkUser(Long ownerId/*, OAuth2Authentication oAuth2Authentication*/) throws Exception {
+//        Map<String, Object> details = (Map<String, Object>) oAuth2Authentication.getUserAuthentication().getDetails();
+//        Map<String, Object> principal = (Map<String, Object>) details.get("principal");
+//        System.out.println(principal.get("companyId"));
+//        if (ownerId != Long.valueOf(principal.get("companyId").toString())) {
+//            throw new Exception("Not allowed");
+//        }
     }
 
     private static void deleteChildren(Process process, List<Process> processes, List<Long> documentIds, boolean root) {

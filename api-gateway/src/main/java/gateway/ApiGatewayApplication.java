@@ -1,38 +1,26 @@
 package gateway;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletRegistration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
-import org.springframework.cloud.netflix.zuul.filters.route.ZuulFallbackProvider;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.security.oauth2.client.OAuth2ClientContext;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
-import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRegistration;
 
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableZuulProxy
 @EnableSwagger2
-@EnableOAuth2Sso
+//@EnableOAuth2Sso
 @EnableCircuitBreaker
 public class ApiGatewayApplication implements WebApplicationInitializer {
 
@@ -47,17 +35,17 @@ public class ApiGatewayApplication implements WebApplicationInitializer {
 
     @LoadBalanced
     @Bean
-    public OAuth2RestTemplate auth2RestTemplate(OAuth2ProtectedResourceDetails resourceDetails, OAuth2ClientContext clientContext) {
-        return new OAuth2RestTemplate(resourceDetails, clientContext);
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 
-    @Bean
-    public FilterRegistrationBean oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter) {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(filter);
-        registration.setOrder(-100);
-        return registration;
-    }
+//    @Bean
+//    public FilterRegistrationBean oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter) {
+//        FilterRegistrationBean registration = new FilterRegistrationBean();
+//        registration.setFilter(filter);
+//        registration.setOrder(-100);
+//        return registration;
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(ApiGatewayApplication.class, args);

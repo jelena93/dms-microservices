@@ -8,7 +8,7 @@ public class UserCmd {
     private String name;
     private String surname;
     private Long companyId;
-    private List<String> roles;
+//    private List<String> roles;
 
     public String getUsername() {
         return username;
@@ -50,13 +50,13 @@ public class UserCmd {
         this.companyId = companyId;
     }
 
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
+//    public List<String> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(List<String> roles) {
+//        this.roles = roles;
+//    }
 
     @Override
     public String toString() {
@@ -66,7 +66,7 @@ public class UserCmd {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", companyId=" + companyId +
-                ", roles=" + roles +
+//                ", roles=" + roles +
                 '}';
     }
 }

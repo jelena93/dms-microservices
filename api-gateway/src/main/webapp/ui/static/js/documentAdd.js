@@ -33,9 +33,9 @@ function setDescriptors(docType) {
     $.ajax({
         type: "GET",
         url: "descriptor/document-types/" + docType.value,
-        beforeSend: function (request) {
-            request.setRequestHeader(header, token);
-        },
+        // beforeSend: function (request) {
+        //     request.setRequestHeader(header, token);
+        // },
         dataType: 'json',
         success: function (data) {
             showDescriptors(data);
@@ -262,9 +262,9 @@ function saveDocument() {
         enctype: 'multipart/form-data',
         contentType: false,
         dataType: 'json',
-        beforeSend: function (request) {
-            request.setRequestHeader(header, token);
-        },
+        // beforeSend: function (request) {
+        //     request.setRequestHeader(header, token);
+        // },
         success: function (data) {
 //                checked = false;
 //                isSure = false;
